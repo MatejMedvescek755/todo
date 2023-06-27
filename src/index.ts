@@ -32,3 +32,19 @@ export const deleteItem =async (id:number) => {
     console.log(jsonData)
     return jsonData
 }
+
+export interface Todos{
+        todos: Array<Todo>
+        total: number
+        skip: number,
+        limit:number
+    
+}
+
+interface Todo{
+    id: number,
+    todo: string,
+    completed: boolean,
+    userId: number,
+    isDeleted?:boolean
+}

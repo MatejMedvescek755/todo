@@ -1,28 +1,27 @@
 import { getItems } from './index.ts'
 import { useEffect, useState } from 'react'
 import Tab from './components/tab/index.tsx';
-import { addItem } from './index.ts'
-
+import { addItem } from './index.ts';
+import { Todos } from "./index.ts";
 
 function App() {
-  const [todoList, setTodoList] = useState<any>();
-  const [deletedList, setDeletedList] = useState([]);
+  const [ todoList, setTodoList ] = useState<any>();
   let text = "";
 
-  function handleChange(event){ 
-    text=event.target.value
+  function handleChange(event) {
+    text = event.target.value
   }
 
-  async function handleClick(){
+  async function handleClick() {
     const req = await addItem(text)
     const newObject = {
-      todos:[req].concat(todoList["todos"]),
-      total:todoList["total"],
-      skip:todoList["skip"],
-      limit:todoList["limit"]
+      todos: [req].concat(todoList["todos"]),
+      total: todoList["total"],
+      skip: todoList["skip"],
+      limit: todoList["limit"]
     }
     setTodoList(newObject)
-    text="" 
+    text = ""
   }
 
   useEffect(() => {
@@ -46,13 +45,10 @@ function App() {
             <button className='mt-6 min-w-fit border-2 p-2 border-white rounded-md' onClick={handleClick}>confirm</button>
           </div>
         </div>
-        <div>
-          { deletedList}
-        </div>
         <div className='flex flex-wrap justify-center items-start justify-center content-center w-[55vw] flex-col'>
-          {todoList ? <div>{ todoList["todos"].map((element) => {
-            if(!deletedList.includes(element.id)){
-              return <Tab key={element.id} {...{ id: element.id, todo: element.todo, completed: element.completed, userId: element.userId, setDeletedList:setDeletedList, deletedList:deletedList }} ></Tab>
+          {todoList ? <div>{todoList["todos"].map(({id, todo, completed, userId, isDeleted}) => {
+            if (!isDeleted) {
+              return <Tab key={id} {...{ id, todo, completed, userId, setTodoList: setTodoList, todoList: todoList }} ></Tab>
             }
           })
 
