@@ -6,6 +6,7 @@ import { addItem } from './index.ts'
 
 function App() {
   const [todoList, setTodoList] = useState<any>();
+  const [deletedList, setDeletedList] = useState([]);
   let text = "";
 
   function handleChange(event){ 
@@ -13,9 +14,7 @@ function App() {
   }
 
   async function handleClick(){
-    console.log(text)
     const req = await addItem(text)
-    console.log(req)
     const newObject = {
       todos:[req].concat(todoList["todos"]),
       total:todoList["total"],
@@ -23,7 +22,6 @@ function App() {
       limit:todoList["limit"]
     }
     setTodoList(newObject)
-    console.log(todoList)
     text="" 
   }
 
@@ -38,20 +36,27 @@ function App() {
   return (
     <>
       <div id="main" className='flex flex-col items-center flex-wrap max-w-[100vw] min-h-[100vh]'>
-        <div className='flex w-70vw] flex-row justify-end items-end'>
-
-          <div className='flex flex-col'>
+        <div className='flex w-[55vw] h-[10vh] flex-row justify-center items-end'>
+          <div className='flex flex-col mb-4 w-[50vw]'>
             <label htmlFor="add">add tasks</label>
-            <input className='w-[50vw]' type="text" name="add" id="add" onChange={handleChange} />
+            <input className='2xl:w-[50vw] xl:w-[49vw] lg:w-[48vw]
+            sm:w-[45vw] w-[42vw]  rounded-sm p-2' type="text" name="add" id="add" onChange={handleChange} />
           </div>
-          <button onClick={handleClick}>confirm</button>
+          <div className='flex justify-center items-center w-[5vw] h-[10vh]'>
+            <button className='mt-6 min-w-fit border-2 p-2 border-white rounded-md' onClick={handleClick}>confirm</button>
+          </div>
         </div>
-        <div className='flex flex-wrap items-start justify-center content-center w-[70vw] flex-col'>
-          {todoList ? <>{todoList["todos"].map((element) => {
-            return <Tab key={element.id} {...{ id: element.id, todo: element.todo, completed: element.completed, userId: element.userId }} ></Tab>
+        <div>
+          { deletedList}
+        </div>
+        <div className='flex flex-wrap justify-center items-start justify-center content-center w-[55vw] flex-col'>
+          {todoList ? <div>{ todoList["todos"].map((element) => {
+            if(!deletedList.includes(element.id)){
+              return <Tab key={element.id} {...{ id: element.id, todo: element.todo, completed: element.completed, userId: element.userId, setDeletedList:setDeletedList, deletedList:deletedList }} ></Tab>
+            }
           })
 
-          }</> : <p>not mounted</p>}
+          }</div> : <p>not mounted</p>}
         </div>
       </div>
     </>

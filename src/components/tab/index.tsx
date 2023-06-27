@@ -5,6 +5,8 @@ export interface TabProps{
     todo:string;
     completed:boolean;
     userId:number;
+    setDeletedList:React.Dispatch<React.SetStateAction<number[]>>,
+    deletedList:Array<number>,
 }
 
 export default Tab
