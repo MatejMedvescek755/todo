@@ -9,7 +9,8 @@ export const getItems = async () => {
     return jsonData
 }
 
-export const AddItem = async (todo:string, completed?:boolean, userId?:number) => {
+export const addItem = async (todo: string, completed?: boolean,
+    userId?: number) => {
     const response = await fetch('https://dummyjson.com/todos/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
