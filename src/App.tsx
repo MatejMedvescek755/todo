@@ -6,7 +6,7 @@ import { Todos } from "./index.ts";
 import React from 'react';
 
 function App() {
-  const [todoList, setTodoList] = useState<Todos>()
+  const [todos, setTodos] = useState<Todos>()
   const [text, setText] = React.useState<string>("")
   const [error, setError] = React.useState<any>();
 
@@ -14,12 +14,12 @@ function App() {
     try {
       const req = await addItem(text)
       const newObject = {
-        todos: [req].concat(todoList["todos"]),
-        total: todoList["total"],
-        skip: todoList["skip"],
-        limit: todoList["limit"]
+        todos: [req].concat(todos["todos"]),
+        total: todos["total"],
+        skip: todos["skip"],
+        limit: todos["limit"]
       }
-      setTodoList(newObject)
+      setTodos(newObject)
       setText("")
     } catch (error) {
       console.error(error)
@@ -30,7 +30,7 @@ function App() {
   React.useEffect(() => {
     try {
       getItems().then((res) => {
-        setTodoList(res)
+        setTodos(res)
       })
     } catch (error) {
       console.error(error)
@@ -58,9 +58,9 @@ function App() {
           </div>
         </div>
         <div className='flex flex-wrap justify-center items-start justify-center content-center w-[55vw] flex-col'>
-          {todoList ? <div>{todoList["todos"].map(({ id, todo, completed, userId, isDeleted }) => {
+          {todos ? <div>{todos["todos"].map(({ id, todo, completed, userId, isDeleted }) => {
             if (!isDeleted) {
-              return <Tab key={id} {...{ id, todo, completed, userId, setTodoList: setTodoList, todoList: todoList }} ></Tab>
+              return <Tab key={id} {...{ id, todo, completed, userId, setTodos: setTodos, todos: todos }} ></Tab>
             }
           })
 

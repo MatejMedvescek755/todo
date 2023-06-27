@@ -2,26 +2,26 @@ import { TabProps } from "."
 import  Checkmark  from "../../assets/Checkmark.tsx"
 import { deleteItem } from "../../index.ts"
 
-const Tab = ({id ,todo, completed, userId, setTodoList, todoList }: TabProps)=>{
+const Tab = ({id ,todo, completed, userId, setTodos, todos }: TabProps)=>{
 
-    async function deleteTab() {
+    async function onDeleteHandler() {
         const obj = await deleteItem(id)
 
-        const list = todoList["todos"].map((el)=>{
+        const list = todos["todos"].map((el)=>{
             if(el.id == id){
                 return obj
             }else{
                 return el
             }
         })
-        const newObject = {
+        const newTodo = {
             todos: list,
-            total: todoList["total"],
-            skip: todoList["skip"],
-            limit: todoList["limit"]
+            total: todos["total"],
+            skip: todos["skip"],
+            limit: todos["limit"]
           }
 
-        setTodoList(newObject)
+        setTodos(newTodo)
     }
 
     return(
@@ -31,7 +31,7 @@ const Tab = ({id ,todo, completed, userId, setTodoList, todoList }: TabProps)=>{
                 <p>{todo}</p>
             </div>
             <div>
-                <button className="h-[5vh] w-[4vw] border-2 border-black rounded-lg p-2 hover:text-white hover:bg-black active:text-sm" onClick={deleteTab}>delete</button>
+                <button className="h-[5vh] w-[4vw] border-2 border-black rounded-lg p-2 hover:text-white hover:bg-black active:text-sm" onClick={onDeleteHandler}>delete</button>
             </div>
 
         </div>

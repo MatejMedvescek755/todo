@@ -7,8 +7,8 @@ export interface TabProps{
     todo:string;
     completed:boolean;
     userId:number;
-    setTodoList:React.Dispatch<React.SetStateAction<number[]>>,
-    todoList:Array<number>,
+    setTodos:React.Dispatch<React.SetStateAction<number[]>>,
+    todos:Array<number>,
 }
 
 export default Tab
