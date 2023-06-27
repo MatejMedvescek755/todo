@@ -5,10 +5,8 @@ import { deleteItem } from "../../index.ts"
 const Tab = ({id ,todo, completed, userId, setTodoList, todoList }: TabProps)=>{
 
     async function deleteTab() {
-        console.log(id) 
-        console.log(todoList)
         const obj = await deleteItem(id)
-        console.log(obj )
+
         const list = todoList["todos"].map((el)=>{
             if(el.id == id){
                 return obj
@@ -22,7 +20,7 @@ const Tab = ({id ,todo, completed, userId, setTodoList, todoList }: TabProps)=>{
             skip: todoList["skip"],
             limit: todoList["limit"]
           }
-        console.log(newObject)
+
         setTodoList(newObject)
     }
 

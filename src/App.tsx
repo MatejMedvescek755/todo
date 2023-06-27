@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react'
 import Tab from './components/tab/index.tsx';
 import { addItem } from './index.ts';
 import { Todos } from "./index.ts";
+import React from 'react';
 
 function App() {
-  const [ todoList, setTodoList ] = useState<any>();
+  const [ todoList, setTodoList ] = React.useState<Todos[]>([]);
+  
   let text = "";
 
   function handleChange(event) {
@@ -25,7 +27,7 @@ function App() {
   }
 
   useEffect(() => {
-    setTodoList(null)
+    
     getItems().then((res) => {
       setTodoList(res)
     })
