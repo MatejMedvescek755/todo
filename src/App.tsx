@@ -12,17 +12,18 @@ function App() {
     text+=event.target.value
   }
 
-  async function handleClick(){
-    const req = await addItem(text)
-    console.log(todoList["todos"].unshift(req))
-    text="" 
-  }
 
   useEffect(() => {
     setTodoList(null)
     getItems().then((res) => {
       setTodoList(res)
     })
+
+    async function handleClick(){
+      const req = await addItem(text)
+      console.log(todoList["todos"].unshift(req))
+      text="" 
+    }
   }, [])
 
   return (
