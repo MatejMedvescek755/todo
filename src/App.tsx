@@ -7,11 +7,25 @@ import { addItem } from './index.ts'
 function App() {
   const [todoList, setTodoList] = useState<any>();
   let text = "";
-  function handleChange(event){
-    console.log(event.target.value)  
-    text+=event.target.value
+
+  function handleChange(event){ 
+    text=event.target.value
   }
 
+  async function handleClick(){
+    console.log(text)
+    const req = await addItem(text)
+    console.log(req)
+    const newObject = {
+      todos:[req].concat(todoList["todos"]),
+      total:todoList["total"],
+      skip:todoList["skip"],
+      limit:todoList["limit"]
+    }
+    setTodoList(newObject)
+    console.log(todoList)
+    text="" 
+  }
 
   useEffect(() => {
     setTodoList(null)
@@ -19,11 +33,6 @@ function App() {
       setTodoList(res)
     })
 
-    async function handleClick(){
-      const req = await addItem(text)
-      console.log(todoList["todos"].unshift(req))
-      text="" 
-    }
   }, [])
 
   return (
