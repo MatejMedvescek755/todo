@@ -6,7 +6,6 @@ import { Todos } from "./index.ts";
 import React from 'react';
 import { deleteItem } from "./index.ts"
 import { Link, useLocation, Outlet } from "react-router-dom"
-import EditTab from './components/editTab/EditTab.tsx';
 
 function App() {
   const [todos, setTodos] = useState<Todos>()
