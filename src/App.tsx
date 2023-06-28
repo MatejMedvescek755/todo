@@ -5,6 +5,7 @@ import { addItem } from './index.ts';
 import { Todos } from "./index.ts";
 import React from 'react';
 import { deleteItem } from "./index.ts"
+import {Link} from "react-router-dom"
 
 function App() {
   const [todos, setTodos] = useState<Todos>()
@@ -85,7 +86,9 @@ function App() {
           {todos ? <div>{
             todos["todos"].map((todo:Todo) => {
             if (!todo.isDeleted) {
-              return <TodoTab key={todo.id} todo={todo} onDeleteHandler={onDeleteHandler} ></TodoTab>
+              return <Link to={""+todo.id}>
+                <TodoTab key={todo.id} todo={todo} onDeleteHandler={onDeleteHandler} ></TodoTab>
+              </Link> 
             }
           })
 

@@ -1,6 +1,10 @@
 
-
-
+export const getItem =async (id:number) => {
+    const response = await fetch('https://dummyjson.com/todos/1')
+    const jsonData = await response.json()
+    console.log(jsonData)
+    return jsonData
+}
 
 export const getItems = async () => {
     const response = await fetch('https://dummyjson.com/todos')

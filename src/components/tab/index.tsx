@@ -1,5 +1,5 @@
 import TodoTab from "./TodoTab";
-import { Todo } from "../../index"
+import { Todo } from "../../../index"
 
 
 export interface TabProps{
