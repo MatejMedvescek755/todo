@@ -32,13 +32,12 @@ export const deleteItem =async (id:number) => {
 
 export interface Todos{
         todos: Array<Todo>
-        total: number
-        skip: number,
-        limit:number
-    
+        total?: number
+        skip?: number,
+        limit?:number
 }
 
-interface Todo{
+export interface Todo{
     id: number,
     todo: string,
     completed: boolean,
