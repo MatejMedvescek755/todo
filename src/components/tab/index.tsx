@@ -3,8 +3,8 @@ import { Todo } from "../../index"
 
 
 export interface TabProps{
-    Todo:Todo
-    onDeleteHandler:React.Dispatch<React.SetStateAction<number>>,
+    todo:Todo
+    onDeleteHandler:React.Dispatch<void>,
 }
 
 export default TodoTab

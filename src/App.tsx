@@ -1,4 +1,4 @@
-import { getItems } from './index.ts'
+import { Todo, getItems } from './index.ts'
 import { useEffect, useState } from 'react'
 import TodoTab from './components/tab/index.tsx';
 import { addItem } from './index.ts';
@@ -82,9 +82,10 @@ function App() {
           </div>
         </div>
         <div className='flex flex-wrap justify-center items-start justify-center content-center w-[55vw] flex-col'>
-          {todos ? <div>{todos["todos"].map(({ id, todo, completed, userId, isDeleted }) => {
-            if (!isDeleted) {
-              return <TodoTab key={id} {...{ Todo:{id,todo,completed,userId },onDeleteHandler: onDeleteHandler}} ></TodoTab>
+          {todos ? <div>{
+            todos["todos"].map((todo:Todo) => {
+            if (!todo.isDeleted) {
+              return <TodoTab key={todo.id} {...{ todo:todo,onDeleteHandler: onDeleteHandler}} ></TodoTab>
             }
           })
 
