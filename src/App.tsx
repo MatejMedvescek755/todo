@@ -85,7 +85,7 @@ function App() {
           {todos ? <div>{
             todos["todos"].map((todo:Todo) => {
             if (!todo.isDeleted) {
-              return <TodoTab key={todo.id} {...{ todo:todo,onDeleteHandler: onDeleteHandler}} ></TodoTab>
+              return <TodoTab key={todo.id} todo={todo} onDeleteHandler={onDeleteHandler} ></TodoTab>
             }
           })
 
