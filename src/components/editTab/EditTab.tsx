@@ -1,11 +1,11 @@
 import React, { useState } from "react"
 import { getItem } from "../../index"
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Form, redirect, useLocation } from "react-router-dom";
 import { Todo } from "../../index"
 
 const EditTab = () => {
-    const [confirm, setConfirm ] = useState()
-    const [text, setText ] = useState<string>()
+    const [confirm, setConfirm] = useState()
+    const [text, setText] = useState<string>()
     const [error, setError] = useState<any>();
 
     const todo = useLoaderData();
@@ -15,13 +15,13 @@ const EditTab = () => {
     }
 
 
-    function handleToggle(event){
+    function handleToggle(event) {
         setConfirm(event.target.checked)
     }
 
     return (
-        <div id="main" className="flex w-screen h-screen justify-center items-center">
 
+        <dialog open={true} className=" bg-white border-1-black fixed top-30 left-50">
             <div className="w-[30vw] h-[40vh] p-4 bg-white text-black flex  flex-col items-start rounded-lg">
                 <h1 className="p-2 font-black text-xl">
                     Edit your todo
@@ -39,18 +39,26 @@ const EditTab = () => {
                 <button className="h-[5vh] w-[4vw] border-2 border-black rounded-lg p-2 hover:text-white hover:bg-black active:text-sm" onClick={handleClick}>delete</button>
 
             </div>
-        </div>
-    )
+        </dialog>
+    );
+
 }
 
 export const loader = async ({ params }) => {
     try {
+        console.log(params.id)
         const todo: Todo = await getItem(params.id)
         console.log(todo)
-        return todo   
+        return todo
     } catch (error) {
         console.error(error)
     }
+}
+export async function action({ request, params }) {
+    const formData = await request.formData();
+    const updates = Object.fromEntries(formData);
+    //await updateContact(params.contactId, updates);
+    return redirect(`/contacts/${params.contactId}`);
 }
 
 export default EditTab
