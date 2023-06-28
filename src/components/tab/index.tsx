@@ -1,4 +1,4 @@
-import Tab from "./Tab";
+import TodoTab from "./TodoTab";
 import { Todo } from "../../index"
 
 
@@ -7,6 +7,4 @@ export interface TabProps{
     onDeleteHandler:React.Dispatch<React.SetStateAction<number>>,
 }
 
-
-
-export default Tab
+export default TodoTab

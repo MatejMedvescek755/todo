@@ -24,8 +24,7 @@ export const addItem = async (todo: string, completed?: boolean,
 }
 
 export const deleteItem =async (id:number) => {
-    const response = await fetch('https://dummyjson.com/todos/'+id, {method: 'DELETE',
-    })
+    const response = await fetch('https://dummyjson.com/todos/'+id, {method: 'DELETE',})
     const jsonData = await response.json()
     return jsonData
 }

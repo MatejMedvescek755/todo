@@ -1,6 +1,6 @@
 import { getItems } from './index.ts'
 import { useEffect, useState } from 'react'
-import Tab from './components/tab/index.tsx';
+import TodoTab from './components/tab/index.tsx';
 import { addItem } from './index.ts';
 import { Todos } from "./index.ts";
 import React from 'react';
@@ -28,7 +28,7 @@ function App() {
     }
   }
 
-  const onDeleteHandler = async (id) => {
+  const onDeleteHandler = async (id:number) => {
     try {
       const obj = await deleteItem(id)
       const list = todos["todos"].map((el)=>{
@@ -51,7 +51,7 @@ function App() {
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     try {
       getItems().then((res) => {
         setTodos(res)
@@ -84,7 +84,7 @@ function App() {
         <div className='flex flex-wrap justify-center items-start justify-center content-center w-[55vw] flex-col'>
           {todos ? <div>{todos["todos"].map(({ id, todo, completed, userId, isDeleted }) => {
             if (!isDeleted) {
-              return <Tab key={id} {...{ Todo:{id,todo,completed,userId },onDeleteHandler: onDeleteHandler}} ></Tab>
+              return <TodoTab key={id} {...{ Todo:{id,todo,completed,userId },onDeleteHandler: onDeleteHandler}} ></TodoTab>
             }
           })
 

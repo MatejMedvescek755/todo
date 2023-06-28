@@ -1,7 +1,7 @@
-import { TabProps } from "."
+import { TabProps } from "./index.tsx"
 import  Checkmark  from "../../assets/Checkmark.tsx"
 
-const Tab = ({Todo, onDeleteHandler }: TabProps)=>{
+const TodoTab = ({Todo, onDeleteHandler }: TabProps)=>{
     const onDelete = ()=>{
         onDeleteHandler(Todo.id)
     }
@@ -21,4 +21,4 @@ const Tab = ({Todo, onDeleteHandler }: TabProps)=>{
 }
 
 
-export default Tab
+export default TodoTab
