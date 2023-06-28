@@ -1,47 +1,95 @@
-import { getItems } from './index.ts'
+import { Todo, getItems } from './index.ts'
 import { useEffect, useState } from 'react'
-import Tab from './components/tab/index.tsx';
-import { addItem } from './index.ts'
-
+import TodoTab from './components/tab/index.tsx';
+import { addItem } from './index.ts';
+import { Todos } from "./index.ts";
+import React from 'react';
+import { deleteItem } from "./index.ts"
 
 function App() {
-  const [todoList, setTodoList] = useState<any>();
-  let text = "";
-  function handleChange(event){
-    console.log(event.target.value)  
-    text+=event.target.value
+  const [todos, setTodos] = useState<Todos>()
+  const [text, setText] = React.useState<string>("")
+  const [error, setError] = React.useState<any>();
+
+  async function handleClick() {
+    try {
+      const req = await addItem(text)
+      const newObject = {
+        todos: [req].concat(todos["todos"]),
+        total: todos["total"],
+        skip: todos["skip"],
+        limit: todos["limit"]
+      }
+      setTodos(newObject)
+      setText("")
+    } catch (error) {
+      console.error(error)
+      setError(error) 
+    }
   }
 
-  async function handleClick(){
-    const req = await addItem(text)
-    console.log(todoList["todos"].unshift(req))
-    text="" 
+  const onDeleteHandler = async (id:number) => {
+    try {
+      const obj = await deleteItem(id)
+      const list = todos["todos"].map((el)=>{
+        if(el.id == id){
+            return obj
+        }else{
+            return el
+        }
+      })
+      const newTodo = {
+        todos: list,
+        total: todos["total"],
+        skip: todos["skip"],
+        limit: todos["limit"]
+      }
+    setTodos(newTodo) 
+    } catch (error) {
+      console.error(error)
+      setError(error)
+    }
   }
 
   useEffect(() => {
-    setTodoList(null)
-    getItems().then((res) => {
-      setTodoList(res)
-    })
+    try {
+      getItems().then((res) => {
+        setTodos(res)
+      })
+    } catch (error) {
+      console.error(error)
+      setError(error)
+    }
+
+    return () => {
+      setError(undefined);
+    }
+
   }, [])
 
+  if (error) return "Error...";
   return (
     <>
       <div id="main" className='flex flex-col items-center flex-wrap max-w-[100vw] min-h-[100vh]'>
-        <div className='flex w-70vw] flex-row justify-end items-end'>
-
-          <div className='flex flex-col'>
+        <div className='flex w-[55vw] h-[10vh] flex-row justify-center items-end'>
+          <div className='flex flex-col mb-4 w-[50vw]'>
             <label htmlFor="add">add tasks</label>
-            <input className='w-[50vw]' type="text" name="add" id="add" onChange={handleChange} />
+            <input className='2xl:w-[50vw] xl:w-[49vw] lg:w-[48vw]
+            sm:w-[45vw] w-[42vw]  rounded-sm p-2' type="text" name="add" id="add" value={text} onChange={(e) => setText(e.target.value)} />
           </div>
-          <button onClick={handleClick}>confirm</button>
+          <div className='flex justify-center items-center w-[5vw] h-[10vh]'>
+            <button className='mt-6 min-w-fit border-2 p-2 border-white rounded-md' onClick={handleClick}>confirm</button>
+          </div>
         </div>
-        <div className='flex flex-wrap items-start justify-center content-center w-[70vw] flex-col'>
-          {todoList ? <>{todoList["todos"].map((element) => {
-            return <Tab key={element.id} {...{ id: element.id, todo: element.todo, completed: element.completed, userId: element.userId }} ></Tab>
+        <div className='flex flex-wrap justify-center items-start justify-center content-center w-[55vw] flex-col'>
+          {todos ? <div>{
+            todos["todos"].map((todo:Todo) => {
+            if (!todo.isDeleted) {
+              return <TodoTab key={todo.id} todo={todo} onDeleteHandler={onDeleteHandler} ></TodoTab>
+            }
           })
 
-          }</> : <p>not mounted</p>}
+          }</div> : <p>loading</p>}
         </div>
       </div>
     </>

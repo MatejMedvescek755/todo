@@ -1,10 +1,10 @@
-import Tab from "./tab";
+import TodoTab from "./TodoTab";
+import { Todo } from "../../index"
+
 
 export interface TabProps{
-    id:number;
-    todo:string;
-    completed:boolean;
-    userId:number;
+    todo:Todo
+    onDeleteHandler:React.Dispatch<void>,
 }
 
-export default Tab
+export default TodoTab
