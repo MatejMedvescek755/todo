@@ -7,23 +7,18 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from "./error-page";
-import Modal from './components/Modal/Modal.tsx';
-import { getItem } from "./index.ts";
-import { Todo } from "./index";
-import TodoViewModal from "./components/TodoViewModal/TodoViewModal.tsx"
+import SinglePageView from "./components/SinglePageView/SinglePageView.tsx"
 
 
 const router = createBrowserRouter([
   {
     path: "/todos",
     element: <App />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/todos/:id",
-        element: <Modal><TodoViewModal /></Modal>,
-      },
-    ],
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/todos/:id",
+    element: <SinglePageView></SinglePageView>
   },
   // {
   //   path:"/:id",
