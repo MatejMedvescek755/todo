@@ -2,10 +2,10 @@ import { TabProps } from "./index.tsx"
 import  Checkmark  from "../../assets/Checkmark.tsx"
 
 const TodoTab = ({todo, onDeleteHandler }: TabProps)=>{
-    const onDelete = ()=>{
+    const onDelete = (event)=>{
+        event.preventDefault()
         onDeleteHandler(todo.id)
     }
-
     return(
         <div className="bg-white text-black mb-4 p-2 rounded-md flex w-[55vw] justify-between">
             <div className="flex h-[5vh] items-center">
