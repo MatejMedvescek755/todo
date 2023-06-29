@@ -7,7 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from "./error-page";
-import EditTab, {loader as editLoader} from './components/editTab/EditTab.tsx';
+import TabModal, {loader as editLoader} from './components/editTab/TabModal.tsx';
 
 
 const router = createBrowserRouter([
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/:id",
-        element: <EditTab />,
+        element: <TabModal />,
         loader:editLoader,
       },
     ],
