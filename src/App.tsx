@@ -1,6 +1,6 @@
 import { Todo, getItems } from './index.ts'
 import { useEffect, useState } from 'react'
-import TodoTab from './components/tab/index.tsx';
+import SingleTodoView from './components/tab/index.tsx';
 import { addItem } from './index.ts';
 import { Todos } from "./index.ts";
 import React from 'react';
@@ -73,7 +73,7 @@ function App() {
   if (error) return "Error...";
   return (
     <>
-      <Outlet></Outlet>
+      <Outlet />
       <div id="main" className='flex flex-col items-center flex-wrap max-w-[100vw] min-h-[100vh]'>
         <div className='flex w-[55vw] h-[10vh] flex-row justify-center items-end'>
           <div className='flex flex-col mb-4 w-[50vw]'>
@@ -91,7 +91,7 @@ function App() {
             if (!todo.isDeleted) {
               return <Link to={{pathname:""+todo.id}} 
               state={{backgroundLocation: location }} >
-                <TodoTab key={todo.id} todo={todo} onDeleteHandler={onDeleteHandler} ></TodoTab>
+                <SingleTodoView key={todo.id} todo={todo} onDeleteHandler={onDeleteHandler} ></SingleTodoView>
               </Link> 
             }
           })

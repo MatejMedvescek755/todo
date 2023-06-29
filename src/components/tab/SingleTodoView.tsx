@@ -1,7 +1,8 @@
 import { TabProps } from "./index.tsx"
 import  Checkmark  from "../../assets/Checkmark.tsx"
 
-const TodoTab = ({todo, onDeleteHandler }: TabProps)=>{
+const SingleTodoView = ({todo, onDeleteHandler }: TabProps)=>{
+
     const onDelete = (event)=>{
         event.preventDefault()
         onDeleteHandler(todo.id)
@@ -21,4 +22,4 @@ const TodoTab = ({todo, onDeleteHandler }: TabProps)=>{
 }
 
 
-export default TodoTab
+export default SingleTodoView

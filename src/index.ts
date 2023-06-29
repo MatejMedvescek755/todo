@@ -2,7 +2,6 @@
 export const getItem =async (id:number) => {
     const response = await fetch(`https://dummyjson.com/todos/${id}`)
     const jsonData = await response.json()
-    console.log(jsonData)
     return jsonData
 }
 
