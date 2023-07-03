@@ -1,5 +1,5 @@
-import TodoTab from "./TodoTab";
-import { Todo } from "../../index"
+import SingleTodoView from "./SingleTodoView";
+import { Todo } from "../../../index"
 
 
 export interface TabProps{
@@ -7,4 +7,4 @@ export interface TabProps{
     onDeleteHandler:React.Dispatch<void>,
 }
 
-export default TodoTab
+export default SingleTodoView

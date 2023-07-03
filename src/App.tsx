@@ -1,15 +1,18 @@
 import { Todo, getItems } from './index.ts'
 import { useEffect, useState } from 'react'
-import TodoTab from './components/tab/index.tsx';
+import SingleTodoView from './components/tab/index.tsx';
 import { addItem } from './index.ts';
 import { Todos } from "./index.ts";
 import React from 'react';
 import { deleteItem } from "./index.ts"
+import { Link, useLocation, Outlet } from "react-router-dom"
 
 function App() {
   const [todos, setTodos] = useState<Todos>()
   const [text, setText] = React.useState<string>("")
   const [error, setError] = React.useState<any>();
+
+  const location = useLocation()
 
   async function handleClick() {
     try {
@@ -70,6 +73,7 @@ function App() {
   if (error) return "Error...";
   return (
     <>
+      <Outlet />
       <div id="main" className='flex flex-col items-center flex-wrap max-w-[100vw] min-h-[100vh]'>
         <div className='flex w-[55vw] h-[10vh] flex-row justify-center items-end'>
           <div className='flex flex-col mb-4 w-[50vw]'>
@@ -85,7 +89,10 @@ function App() {
           {todos ? <div>{
             todos["todos"].map((todo:Todo) => {
             if (!todo.isDeleted) {
-              return <TodoTab key={todo.id} todo={todo} onDeleteHandler={onDeleteHandler} ></TodoTab>
+              return <Link to={{pathname:""+todo.id}} 
+              state={{backgroundLocation: location }} >
+                <SingleTodoView key={todo.id} todo={todo} onDeleteHandler={onDeleteHandler} ></SingleTodoView>
+              </Link> 
             }
           })
 
