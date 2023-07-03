@@ -26,7 +26,6 @@ const EditTodoComponent = ({ setState }: EditTodoProps) => {
 
     function handleToggle() {
         setConfirm(!confirm)
-        console.log(confirm)
     }
 
     useEffect(() => {

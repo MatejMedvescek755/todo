@@ -4,7 +4,6 @@ import { DeleteTodoProps } from "."
 
 const DeleteTodoComponent = ({ setState }: DeleteTodoProps) => {
     function handleClick(event: React.MouseEvent) {
-        console.log("delete")
         setState(false)
     }
     return (
