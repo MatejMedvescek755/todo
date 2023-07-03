@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Todo } from "../../index";
 import { getItem } from "../../index";
+import { EditTodoProps } from ".";
 
 const loader = async (id: number) => {
     try {
@@ -12,7 +13,7 @@ const loader = async (id: number) => {
     }
 }
 
-const TodoViewModal = () => {
+const EditTodoComponent = ({ setState }: EditTodoProps) => {
     const [error, setError] = React.useState<any>();
     const [confirm, setConfirm] = useState<boolean | undefined>(false)
     const [text, setText] = useState<string>()
@@ -20,7 +21,7 @@ const TodoViewModal = () => {
     const [todo, setTodo] = useState<Todo>()
 
     function handleClick(event: React.MouseEvent) {
-        console.log(event)
+        setState(false)
     }
 
     function handleToggle() {
@@ -68,9 +69,8 @@ const TodoViewModal = () => {
                                 </label>
 
                             </div>
-                            <Link to={{ pathname: "/todos" }}>
-                                <button className="h-[5vh] w-[4vw] border-2 border-black rounded-lg p-2 hover:text-white hover:bg-black active:text-sm" onClick={handleClick}>done</button>
-                            </Link>
+
+                            <button className="h-[5vh] w-[4vw] border-2 border-black rounded-lg p-2 hover:text-white hover:bg-black active:text-sm" onClick={handleClick}>done</button>
                         </div>
                     </div>
                     : <p>loading</p>
@@ -79,4 +79,4 @@ const TodoViewModal = () => {
     )
 }
 
-export default TodoViewModal
+export default EditTodoComponent
