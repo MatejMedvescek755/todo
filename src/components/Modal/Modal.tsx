@@ -1,10 +1,11 @@
 import React from "react"
+import { ModalProps } from "./index"
 
-const Modal = ({ children }: { children: React.ReactNode | React.ReactNode[] }) => {
+const Modal = ({ children , isOpen }:ModalProps) => {
 
     return (
         <div className="absolute top-32">
-            <dialog open={true} className=" bg-white shadow-xl shadow-gray-700 fixed top-100 left-50">
+            <dialog open={isOpen} className=" bg-white shadow-xl shadow-gray-700 fixed top-100 left-50">
                 {children}
             </dialog>
         </div>
