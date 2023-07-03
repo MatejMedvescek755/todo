@@ -18,7 +18,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/todos/:id",
-    element: <SinglePageView></SinglePageView>
+    element: <SinglePageView />
   },
   // {
   //   path:"/:id",
