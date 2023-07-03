@@ -6,6 +6,7 @@ import { Todos } from "./index.ts";
 import React from 'react';
 import { deleteItem } from "./index.ts"
 import { Link, useLocation, Outlet } from "react-router-dom"
+import NavBar from './components/NavBar/NavBar.tsx';
 
 function App() {
   const [todos, setTodos] = useState<Todos>()
@@ -73,7 +74,7 @@ function App() {
   if (error) return "Error...";
   return (
     <>
-      <Outlet />
+      <NavBar />
       <div id="main" className='flex flex-col items-center flex-wrap max-w-[100vw] min-h-[100vh]'>
         <div className='flex w-[55vw] h-[10vh] flex-row justify-center items-end'>
           <div className='flex flex-col mb-4 w-[50vw]'>

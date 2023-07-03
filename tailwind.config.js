@@ -5,7 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      "body":["Body-Font","ui-monospace"]
+    }
   },
   plugins: [],
 }

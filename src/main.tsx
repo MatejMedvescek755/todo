@@ -8,9 +8,15 @@ import {
 } from "react-router-dom";
 import ErrorPage from "./error-page";
 import SinglePageView from "./components/SinglePageView/SinglePageView.tsx"
+import NavBar from './components/NavBar/NavBar.tsx';
+import UsersView from './components/UsersView/UsersView.tsx';
 
 
 const router = createBrowserRouter([
+  {
+    path:"/",
+    element:<div><NavBar/>dashboard todo</div>
+  },
   {
     path: "/todos",
     element: <App />,
@@ -20,11 +26,10 @@ const router = createBrowserRouter([
     path: "/todos/:id",
     element: <SinglePageView />
   },
-  // {
-  //   path:"/:id",
-  //   element:<EditTab />,
-  //   loader:editLoader,
-  // },
+  {
+    path: "/users",
+    element: <UsersView />
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
