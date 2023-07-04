@@ -1,52 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Todo } from "../../index";
-import { getItem } from "../../index";
 import { EditTodoProps } from ".";
 
-const loader = async (id: number) => {
-    try {
-        const todo: Todo = await getItem(id)
-        return todo
-    } catch (error) {
-        console.error(error)
-    }
-}
 
-const EditTodoComponent = ({ setState }: EditTodoProps) => {
-    const [error, setError] = React.useState<any>();
-    const [confirm, setConfirm] = useState<boolean | undefined>(false)
-    const [text, setText] = useState<string>()
-    const { id } = useParams()
-    const [todo, setTodo] = useState<Todo>()
+const EditTodoComponent = ({ setState,todo }: EditTodoProps) => {
+    const [confirm, setConfirm] = useState<boolean>()
 
     function handleClick(event: React.MouseEvent) {
         setState(false)
     }
 
     function handleToggle() {
-        setConfirm(!confirm)
-
-    }
-
-    useEffect(() => {
-        try {
-            loader(parseInt(id)).then((res) => {
-                setTodo(res);
-                setConfirm(res.completed)
-            })
-        } catch (error) {
-            console.error(error)
-            setError(error)
+        if(confirm !== undefined){
+            setConfirm(!confirm)
+            console.log(confirm)
+        }else{
+            setConfirm(!todo.completed)
+            console.log(confirm)
         }
 
-        return () => {
-            setError(undefined)
-        }
-    }, [id])
-
-    if (error) {
-        return (error)
     }
     return (
         <div className="w-[20vw] h-[30vh] p-4 bg-white text-black flex  flex-col justify-between items-start rounded-lg">
@@ -62,7 +33,7 @@ const EditTodoComponent = ({ setState }: EditTodoProps) => {
                         <div className="w-[18vw] h-[5vh] items-center flex justify-between">
                             <div className="items-center h-[5vh] flex ">
                                 <label className="relative inline-flex items-center cursor-pointer mb-4">
-                                     <input onChange={handleToggle} type="checkbox" className="sr-only peer" checked={confirm} />
+                                    { confirm !== undefined ?  <input onChange={handleToggle} type="checkbox" className="sr-only peer" checked={confirm} /> : <input onChange={handleToggle} type="checkbox" className="sr-only peer" checked={todo.completed} /> }
                                     <div className="w-11 h-6 bg-red-600
     peer-focus:outline-none  rounded-full peer dark:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-emerald-500"></div>
                                     <span className="ml-3 text-sm font-medium text-black">{confirm && "completed" || "uncompleted"}</span>
