@@ -1,9 +1,8 @@
-import React from "react"
+import NavBar from "./NavBar";
 
 
-const NavBar = ()=>{
-
-    return(
-        <div></div>
-    )
+export interface NavBarProps{
+    page:string
 }
+
+export default NavBar

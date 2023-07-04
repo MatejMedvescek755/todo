@@ -15,7 +15,7 @@ import UsersView from './components/UsersView/UsersView.tsx';
 const router = createBrowserRouter([
   {
     path:"/",
-    element:<div><NavBar/>dashboard todo</div>
+    element:<div><NavBar page="home"/>dashboard todo</div>
   },
   {
     path: "/todos",

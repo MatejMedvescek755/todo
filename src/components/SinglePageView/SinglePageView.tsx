@@ -36,7 +36,7 @@ const SingleTodoView = () => {
         return <div>loading ...</div>
     return (
         <div>
-            <NavBar />
+            <NavBar page={"todos"} />
             <div className="w-full h-[95vh] flex justify-center items-center">
                 <div className="shadow-xl shadow-gray-700 p-4 pb-8 flex flex-col justify-between
                  h-[45vh] rounded-lg bg-white">

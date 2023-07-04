@@ -21,7 +21,7 @@ const UsersView = ()=>{
         return <div>error: {error}</div>
     return(
         <div>
-            <NavBar />
+            <NavBar page="users" />
             {users ? 
             <div className='flex flex-col items-center flex-wrap max-w-[100vw] min-h-[95vh] mt-5'>
                 <div className="h-[3vh] px-2 w-[55vw] flex">
