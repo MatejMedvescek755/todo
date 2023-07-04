@@ -4,7 +4,7 @@ import Modal from "../Modal/Modal"
 import React from "react"
 import NavBar from "../NavBar/NavBar"
 import { useParams } from "react-router-dom"
-import { Todo, getItem } from "../.."
+import { Todo, User, getItem, getUser } from "../.."
 import Checkmark from "../../assets/Checkmark"
 
 const SingleTodoView = () => {
@@ -14,11 +14,15 @@ const SingleTodoView = () => {
     const [todo, setTodo] = React.useState<Todo>()
     const [error, setError] = React.useState<any>();
     const [text, setText] = React.useState<string>()
+    const [ user, setUser ] = React.useState<User>()
 
     React.useEffect(() => {
         try {
             loader(parseInt(id)).then((res) => {
                 setTodo(res);
+                getUser(res?.userId).then((resUser)=>{
+                    setUser(resUser)
+                })
             })
         } catch (error) {
             console.error(error)
@@ -40,6 +44,9 @@ const SingleTodoView = () => {
             <div className="w-full h-[95vh] flex justify-center mt-10">
                 <div className="shadow-xl shadow-gray-700 p-4 pb-8 flex flex-col justify-between
                  h-[30vh] rounded-lg bg-white">
+                    <div className="text-black w-[25vw] flex justify-center">
+                        { user ? <p>Owner of Todo: {user.firstName+" "+user.lastName}</p>  : <p>Loading...</p> }
+                    </div>
                     <div className="w-[25vw] justify-center text-black p-2 flex">
                         <div><p className="font-mono text-lg">{todo.todo}</p></div>
                         <div className="ml-4">{todo.completed ? <Checkmark  /> : ""}</div>

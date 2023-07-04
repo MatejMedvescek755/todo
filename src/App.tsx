@@ -92,7 +92,7 @@ function App() {
             if (!todo.isDeleted) {
               return <Link to={{pathname:""+todo.id}} 
               state={{backgroundLocation: location }} >
-                <SingleTodoView key={todo.id} todo={todo} onDeleteHandler={onDeleteHandler} ></SingleTodoView>
+                <SingleTodoView key={todo.id} todo={todo} onDeleteHandler={onDeleteHandler} />
               </Link> 
             }
           })

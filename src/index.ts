@@ -39,6 +39,20 @@ export const getUsers = async () => {
     return jsonData.users
 }
 
+export const getUser = async (id:number) => {
+  const response = await fetch(`https://dummyjson.com/users/${id}`)
+  const jsonData = await response.json()
+  console.log(id)
+  return jsonData
+}
+
+export const getUserTodos = async (id:number) => {
+  const response = await fetch('https://dummyjson.com/users/5/todos')
+  const jsonData = await response.json()
+  return jsonData.todos
+}
+
+
 export interface Todos{
         todos: Array<Todo>
         total?: number
