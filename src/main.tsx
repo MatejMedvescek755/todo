@@ -4,6 +4,7 @@ import App from './App.tsx'
 import './index.css'
 import {
   createBrowserRouter,
+  Outlet,
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from "./error-page";
@@ -15,25 +16,27 @@ import UserTodosView from './components/UserTodosView/UserTodosView.tsx';
 
 const router = createBrowserRouter([
   {
-    path:"/",
-    element:<div><NavBar page="home"/>dashboard todo</div>
-  },
-  {
-    path: "/todos",
-    element: <App />,
-    errorElement: <ErrorPage />
-  },
-  {
-    path: "/todos/:id",
-    element: <SinglePageView />
-  },
-  {
-    path: "/users",
-    element: <UsersView />
-  },
-  {
-    path: "/users/:userId",
-    element: <UserTodosView />
+    path: "/",
+    element: <div><NavBar page="home" /><Outlet /></div>,
+    children: [
+      {
+        path: "/todos",
+        element: <App />,
+        errorElement: <ErrorPage />
+      },
+      {
+        path: "/todos/:id",
+        element: <SinglePageView />
+      },
+      {
+        path: "/users",
+        element: <UsersView />
+      },
+      {
+        path: "/users/:userId",
+        element: <UserTodosView />
+      }
+    ]
   }
 ]);
 
