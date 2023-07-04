@@ -1,4 +1,3 @@
-import NavBar from "../NavBar/NavBar"
 import React from "react"
 import { useParams } from "react-router-dom"
 import { Todo, User, getUser, getUserTodos } from "../.."
@@ -50,10 +49,9 @@ const UserTodosView = () => {
     if (error) return <div>error: {error}</div>
     return (
         <div className="h-full w-full">
-            <NavBar page="users" />
             <div className="w-full h-[95vh] flex flex-col items-center">
                 <div className="w-[55vw] mt-4 bg-white text-black rounded-md  p-2">
-                    { user ? <p className=" h-[5vh] flex items-center">{user.firstName+" "+user.lastName}'s todos</p> : <p className=" h-[5vh]">Loading...</p>}
+                    { user ? <p className=" h-[5vh] flex items-center">{`${user.firstName} ${user.lastName}`}'s todos</p> : <p className=" h-[5vh]">Loading...</p>}
                 </div>
                 <div className="mt-4">
                     {

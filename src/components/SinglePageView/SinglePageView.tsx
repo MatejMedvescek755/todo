@@ -2,7 +2,6 @@ import DeleteTodoComponent from "../DeleteTodoComponent"
 import EditTodoComponent from "../EditTodoComponent/EditTodoComponent"
 import Modal from "../Modal/Modal"
 import React from "react"
-import NavBar from "../NavBar/NavBar"
 import { useParams } from "react-router-dom"
 import { Todo, User, getItem, getUser } from "../.."
 import Checkmark from "../../assets/Checkmark"
@@ -40,12 +39,11 @@ const SingleTodoView = () => {
         return <div>loading ...</div>
     return (
         <div>
-            <NavBar page={"todos"} />
             <div className="w-full h-[95vh] flex justify-center mt-10">
                 <div className="shadow-xl shadow-gray-700 p-4 pb-8 flex flex-col justify-between
                  h-[30vh] rounded-lg bg-white">
                     <div className="text-black w-[25vw] flex justify-center">
-                        { user ? <p>Owner of Todo: {user.firstName+" "+user.lastName}</p>  : <p>Loading...</p> }
+                        { user ? <p>Owner of Todo: {`${user.firstName} ${user.lastName}`}</p>  : <p>Loading...</p> }
                     </div>
                     <div className="w-[25vw] justify-center text-black p-2 flex">
                         <div><p className="font-mono text-lg">{todo.todo}</p></div>
