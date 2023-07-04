@@ -10,6 +10,7 @@ import ErrorPage from "./error-page";
 import SinglePageView from "./components/SinglePageView/SinglePageView.tsx"
 import NavBar from './components/NavBar/NavBar.tsx';
 import UsersView from './components/UsersView/UsersView.tsx';
+import UserTodosView from './components/UserTodosView/UserTodosView.tsx';
 
 
 const router = createBrowserRouter([
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
     path: "/users",
     element: <UsersView />
   },
+  {
+    path: "/users/:userId",
+    element: <UserTodosView />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
