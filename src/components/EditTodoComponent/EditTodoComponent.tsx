@@ -12,10 +12,8 @@ const EditTodoComponent = ({ setState,todo }: EditTodoProps) => {
     function handleToggle() {
         if(confirm !== undefined){
             setConfirm(!confirm)
-            console.log(confirm)
         }else{
             setConfirm(!todo.completed)
-            console.log(confirm)
         }
 
     }

@@ -32,17 +32,20 @@ export const deleteItem = async (id:number) => {
     return jsonData
 }
 
-export const getUsers = async () => {
-    const response = await fetch('https://dummyjson.com/users')
-    const jsonData = await response.json()
-    console.log(jsonData.users)
-    return jsonData.users
+export const getUsers = async (key?:string, value?:string) => {
+  let response
+  if(key && value){
+    response = await fetch(`https://dummyjson.com/users/filter?key=${key}&value=${value}`)
+  }else{
+    response = await fetch('https://dummyjson.com/users')
+  }
+  const jsonData = await response.json()
+  return jsonData.users
 }
 
 export const getUser = async (id:number) => {
   const response = await fetch(`https://dummyjson.com/users/${id}`)
   const jsonData = await response.json()
-  console.log(id)
   return jsonData
 }
 

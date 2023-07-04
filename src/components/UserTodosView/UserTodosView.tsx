@@ -40,7 +40,6 @@ const UserTodosView = () => {
             })
             getUserTodos(parseInt(userId)).then((res) => {
                 setUserTodos(res)
-                console.log(res)
             })
 
         } catch (error) {
