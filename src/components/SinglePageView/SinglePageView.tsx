@@ -37,9 +37,9 @@ const SingleTodoView = () => {
     return (
         <div>
             <NavBar page={"todos"} />
-            <div className="w-full h-[95vh] flex justify-center items-center">
+            <div className="w-full h-[95vh] flex justify-center mt-10">
                 <div className="shadow-xl shadow-gray-700 p-4 pb-8 flex flex-col justify-between
-                 h-[45vh] rounded-lg bg-white">
+                 h-[30vh] rounded-lg bg-white">
                     <div className="w-[25vw] justify-center text-black p-2 flex">
                         <div><p className="font-mono text-lg">{todo.todo}</p></div>
                         <div className="ml-4">{todo.completed ? <Checkmark  /> : ""}</div>
