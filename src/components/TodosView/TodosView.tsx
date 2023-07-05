@@ -90,10 +90,11 @@ function App() {
           {todos ? <div>{
             todos["todos"].map((todo:Todo) => {
             if (!todo.isDeleted) {
-              return <Link to={{pathname:`${todo.id}`}} 
-               >
+              return(
+
                 <SingleTodoView key={todo.id} todo={todo} onDeleteHandler={onDeleteHandler} />
-              </Link> 
+
+              )
             }
           })
 

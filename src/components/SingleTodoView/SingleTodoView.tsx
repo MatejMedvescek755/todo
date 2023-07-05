@@ -1,20 +1,28 @@
 import { TabProps } from "./index.tsx"
-import  Checkmark  from "../../assets/Checkmark.tsx"
+import Checkmark from "../../assets/Checkmark.tsx"
+import { Link } from "react-router-dom"
+import DeleteIcon from "../../assets/DeleteIcon.tsx"
 
-const SingleTodoView = ({todo, onDeleteHandler }: TabProps)=>{
+const SingleTodoView = ({ todo, onDeleteHandler }: TabProps) => {
 
-    const onDelete = (event:React.MouseEvent)=>{
-        event.preventDefault()
+    const onDelete = (event: React.MouseEvent) => {
         onDeleteHandler(todo.id)
     }
-    return(
-        <div className="bg-white text-black mb-4 p-2 rounded-md flex w-[55vw] justify-between">
+    return (
+        <div className="group cursor-default mb-4 p-2 rounded-md flex w-[55vw]">
             <div className="flex h-[5vh] items-center">
-                {todo.completed && <Checkmark />}
-                <p>{todo.todo}</p>
+                <Link to={{ pathname: `${todo.id}` }}>
+                    {todo.completed ? <p className="text-gray-600 group-hover:text-gray-100 cursor-pointer line-through">
+                        {todo.todo}
+                    </p> 
+                    : 
+                    <p className="text-gray-600 group-hover:text-gray-100 cursor-pointer">
+                        {todo.todo}
+                    </p>}
+                </Link>
             </div>
-            <div>
-                <button className="h-[5vh] w-[4vw] border-2 border-black rounded-lg p-2 hover:text-white hover:bg-black active:text-sm" onClick={onDelete}>delete</button>
+            <div className="group-hover:flex cursor-pointer hidden px-2 items-center" onClick={onDelete}>
+                <DeleteIcon />
             </div>
 
         </div>
