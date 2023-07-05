@@ -78,7 +78,7 @@ function App() {
       <div id="main" className='flex flex-col items-center flex-wrap max-w-[100vw] min-h-[95vh]'>
         <div className='flex w-[55vw] h-[10vh] flex-row justify-center items-end'>
           <div className='flex flex-col mb-4 w-[50vw]'>
-            <label htmlFor="add">add tasks</label>
+            <label className='capitalize' htmlFor="add">add tasks</label>
             <input className='2xl:w-[50vw] xl:w-[49vw] lg:w-[48vw]
             sm:w-[45vw] w-[42vw]  rounded-sm p-2' type="text" name="add" id="add" value={text} onChange={(e) => setText(e.target.value)} autoComplete='false' />
           </div>
