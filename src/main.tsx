@@ -12,13 +12,18 @@ import SinglePageView from "./components/SinglePageView/SinglePageView.tsx"
 import NavBar from './components/NavBar/NavBar.tsx';
 import UsersView from './components/UsersView/UsersView.tsx';
 import UserTodosView from './components/UserTodosView/UserTodosView.tsx';
+import DashboardView from './components/DashboardView/DashboardView.tsx';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div><NavBar page="home" /><Outlet /></div>,
+    element: <div><NavBar page={""} /><Outlet /></div>,
     children: [
+      {
+        path: "/",
+        element: <DashboardView />,
+      },
       {
         path: "/todos",
         element: <App />,
