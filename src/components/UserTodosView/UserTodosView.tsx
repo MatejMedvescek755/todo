@@ -14,14 +14,11 @@ const UserTodosView = () => {
             const obj = await deleteItem(id)
             const list = userTodos.map((el) => {
                 if (el.id == id) {
-                    console.log(el.id+" "+id)
                     return obj
                 } else {
                     return el
                 }
             })
-            console.log(userTodos)
-            console.log(list)
             setUserTodos(list)
         } catch (error) {
             console.error(error)
