@@ -5,7 +5,7 @@ import { addItem } from '../../index.ts';
 import { Todos } from "../../index.ts";
 import React from 'react';
 import { deleteItem } from "../../index.ts"
-import { Link } from "react-router-dom"
+
 
 function App() {
   const [todos, setTodos] = useState<Todos>()

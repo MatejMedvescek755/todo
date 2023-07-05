@@ -1,5 +1,4 @@
 import { TabProps } from "./index.tsx"
-import Checkmark from "../../assets/Checkmark.tsx"
 import { Link } from "react-router-dom"
 import DeleteIcon from "../../assets/DeleteIcon.tsx"
 import React from "react"
@@ -7,7 +6,7 @@ import React from "react"
 const SingleTodoView = ({ todo, onDeleteHandler }: TabProps) => {
     const [deleted, setDeleted] = React.useState<boolean>(false)
 
-    const onDelete = (event: React.MouseEvent) => {
+    const onDelete = () => {
         onDeleteHandler(todo.id)
         setDeleted(true)
     }
