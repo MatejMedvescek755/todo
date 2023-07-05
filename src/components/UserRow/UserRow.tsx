@@ -1,7 +1,7 @@
 
 import { SingleUserProps } from ".";
 
-const SingleUserComponent = ({ user }:SingleUserProps) =>{
+const UserRow = ({ user }:SingleUserProps) =>{
 
     return(
         <div className="bg-white text-black mb-4 p-2 rounded-md flex w-[55vw] cursor-pointer">
@@ -23,4 +23,4 @@ const SingleUserComponent = ({ user }:SingleUserProps) =>{
     )
 }
 
-export default SingleUserComponent
+export default UserRow

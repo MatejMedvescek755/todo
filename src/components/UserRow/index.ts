@@ -1,6 +1,6 @@
-import SingleUserComponent from "./SingleUserComponent";
+import SingleUserComponent from "./UserRow";
 import { User } from "../../index"
-import SingleUserComponent from "./SingleUserComponent";
+import SingleUserComponent from "./UserRow";
 
 
 export interface SingleUserProps{

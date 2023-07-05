@@ -1,6 +1,6 @@
 import { getUsers, User } from "../../index"
 import React from "react"
-import SingleUserComponent from "../SingleUserComponent/SingleUserComponent"
+import SingleUserComponent from "../UserRow/UserRow"
 import { Link } from "react-router-dom"
 
 const UsersView = () => {

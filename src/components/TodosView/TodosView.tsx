@@ -1,10 +1,10 @@
-import { Todo, getItems } from './index.ts'
+import { Todo, getItems } from '../../index.ts'
 import { useEffect, useState } from 'react'
-import SingleTodoView from './components/SingleTodoView/index.tsx';
-import { addItem } from './index.ts';
-import { Todos } from "./index.ts";
+import SingleTodoView from '../SingleTodoView/index.tsx';
+import { addItem } from '../../index.ts';
+import { Todos } from "../../index.ts";
 import React from 'react';
-import { deleteItem } from "./index.ts"
+import { deleteItem } from "../../index.ts"
 import { Link } from "react-router-dom"
 
 function App() {
