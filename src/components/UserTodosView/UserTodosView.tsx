@@ -1,6 +1,6 @@
 import React from "react"
 import { useParams } from "react-router-dom"
-import { Todo, User, getUser, getUserTodos } from "../.."
+import { Todo, User, deleteItem, getUser, getUserTodos } from "../.."
 import SingleTodoView from "../SingleTodoView"
 
 const UserTodosView = () => {
@@ -12,20 +12,17 @@ const UserTodosView = () => {
     const onDeleteHandler = async (id: number) => {
         try {
             const obj = await deleteItem(id)
-            const list = todos["todos"].map((el) => {
+            const list = userTodos.map((el) => {
                 if (el.id == id) {
+                    console.log(el.id+" "+id)
                     return obj
                 } else {
                     return el
                 }
             })
-            const newTodo = {
-                todos: list,
-                total: todos["total"],
-                skip: todos["skip"],
-                limit: todos["limit"]
-            }
-            setTodos(newTodo)
+            console.log(userTodos)
+            console.log(list)
+            setUserTodos(list)
         } catch (error) {
             console.error(error)
             setError(error)
@@ -56,7 +53,9 @@ const UserTodosView = () => {
                 <div className="mt-4">
                     {
                         userTodos ? userTodos.map((todo: Todo) => {
-                            return <SingleTodoView todo={todo} onDeleteHandler={onDeleteHandler} />
+                            if(!todo.isDeleted){
+                                return <SingleTodoView todo={todo} onDeleteHandler={onDeleteHandler} />
+                            }
                         }) :
                             <p>Loading...</p>
                     }
