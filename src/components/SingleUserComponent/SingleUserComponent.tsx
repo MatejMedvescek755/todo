@@ -1,5 +1,4 @@
-import React from "react";
-import { User } from "../..";
+
 import { SingleUserProps } from ".";
 
 const SingleUserComponent = ({ user }:SingleUserProps) =>{
