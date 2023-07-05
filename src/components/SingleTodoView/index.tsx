@@ -1,10 +1,10 @@
 import SingleTodoView from "./SingleTodoView";
-import { Todo } from "../../../index"
+import { Todo } from "../../index"
 
 
 export interface TabProps{
     todo:Todo
-    onDeleteHandler:React.Dispatch<void>,
+    onDeleteHandler:(id: number) => Promise<void>,
 }
 
 export default SingleTodoView

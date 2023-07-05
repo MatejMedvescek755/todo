@@ -9,20 +9,21 @@ import Checkmark from "../../assets/Checkmark"
 const SingleTodoView = () => {
     const [isOpenEdit, setIsOpenEdit] = React.useState<boolean>(false)
     const [isOpenDelete, setIsOpenDelete] = React.useState<boolean>(false)
-    const { id } = useParams()
+    const { id } = useParams<{id:string | undefined}>()
     const [todo, setTodo] = React.useState<Todo>()
     const [error, setError] = React.useState<any>();
-    const [text, setText] = React.useState<string>()
-    const [ user, setUser ] = React.useState<User>()
+    const [user, setUser] = React.useState<User>()
 
     React.useEffect(() => {
         try {
-            loader(parseInt(id)).then((res) => {
+
+            loader(id).then((res) => {
                 setTodo(res);
-                getUser(res?.userId).then((resUser)=>{
+                getUser(res?.userId).then((resUser) => {
                     setUser(resUser)
                 })
             })
+
         } catch (error) {
             console.error(error)
             setError(error)
@@ -35,7 +36,7 @@ const SingleTodoView = () => {
 
     if (error)
         return <div>error {error}</div>
-    if(todo === undefined)
+    if (todo === undefined)
         return <div>loading ...</div>
     return (
         <div>
@@ -43,11 +44,11 @@ const SingleTodoView = () => {
                 <div className="shadow-xl shadow-gray-700 p-4 pb-8 flex flex-col justify-between
                  h-[30vh] rounded-lg bg-white">
                     <div className="text-black w-[25vw] flex justify-center">
-                        { user ? <p>Owner of Todo: {`${user.firstName} ${user.lastName}`}</p>  : <p>Loading...</p> }
+                        {user ? <p>Owner of Todo: {`${user.firstName} ${user.lastName}`}</p> : <p>Loading...</p>}
                     </div>
                     <div className="w-[25vw] justify-center text-black p-2 flex">
                         <div><p className="font-mono text-lg">{todo.todo}</p></div>
-                        <div className="ml-4">{todo.completed ? <Checkmark  /> : ""}</div>
+                        <div className="ml-4">{todo.completed ? <Checkmark /> : ""}</div>
                     </div>
                     <div className="flex w-[25vw] items-center flex-col p-2 ">
                         <button className='mt-6 h-[5vh] w-[15vw] text-black min-w-fit border-2 p-2 border-black rounded-md' onClick={() => setIsOpenEdit(true)}>edit
@@ -68,10 +69,12 @@ const SingleTodoView = () => {
     )
 }
 
-const loader = async (id: number) => {
+const loader = async (id: string | undefined) => {
     try {
-        const todo: Todo = await getItem(id)
-        return todo
+        if(id){
+            const todo: Todo = await getItem(parseInt(id))
+            return todo
+        }
     } catch (error) {
         console.error(error)
     }

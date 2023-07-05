@@ -5,18 +5,19 @@ import { addItem } from './index.ts';
 import { Todos } from "./index.ts";
 import React from 'react';
 import { deleteItem } from "./index.ts"
-import { Link, useLocation, Outlet } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 function App() {
   const [todos, setTodos] = useState<Todos>()
   const [text, setText] = React.useState<string>("")
   const [error, setError] = React.useState<any>();
 
-  const location = useLocation()
+
 
   async function handleClick() {
     try {
       const req = await addItem(text)
+      if(!todos) return
       const newObject = {
         todos: [req].concat(todos["todos"]),
         total: todos["total"],
@@ -34,6 +35,7 @@ function App() {
   const onDeleteHandler = async (id:number) => {
     try {
       const obj = await deleteItem(id)
+      if(!todos) return
       const list = todos["todos"].map((el)=>{
         if(el.id == id){
             return obj
@@ -89,7 +91,7 @@ function App() {
             todos["todos"].map((todo:Todo) => {
             if (!todo.isDeleted) {
               return <Link to={{pathname:`${todo.id}`}} 
-              state={{backgroundLocation: location }} >
+               >
                 <SingleTodoView key={todo.id} todo={todo} onDeleteHandler={onDeleteHandler} />
               </Link> 
             }

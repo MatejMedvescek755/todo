@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { EditTodoProps } from ".";
 
 
 const EditTodoComponent = ({ setState,todo }: EditTodoProps) => {
     const [confirm, setConfirm] = useState<boolean>()
+    const [ text, setText ] = useState<string>()
 
-    function handleClick(event: React.MouseEvent) {
+    function handleClick() {
         setState(false)
+        console.log(text)
     }
 
     function handleToggle() {

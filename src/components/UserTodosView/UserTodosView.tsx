@@ -12,6 +12,7 @@ const UserTodosView = () => {
     const onDeleteHandler = async (id: number) => {
         try {
             const obj = await deleteItem(id)
+            if(!userTodos) return
             const list = userTodos.map((el) => {
                 if (el.id == id) {
                     return obj
@@ -28,6 +29,7 @@ const UserTodosView = () => {
 
     React.useEffect(() => {
         try {
+            if(!userId) return
             getUser(parseInt(userId)).then((res) => {
                 setUser(res)
             })

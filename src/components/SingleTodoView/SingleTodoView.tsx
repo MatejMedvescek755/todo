@@ -3,7 +3,7 @@ import  Checkmark  from "../../assets/Checkmark.tsx"
 
 const SingleTodoView = ({todo, onDeleteHandler }: TabProps)=>{
 
-    const onDelete = (event)=>{
+    const onDelete = (event:React.MouseEvent)=>{
         event.preventDefault()
         onDeleteHandler(todo.id)
     }

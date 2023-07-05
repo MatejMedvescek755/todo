@@ -43,14 +43,14 @@ export const getUsers = async (key?:string, value?:string) => {
   return jsonData.users
 }
 
-export const getUser = async (id:number) => {
+export const getUser = async (id:number | undefined) => {
   const response = await fetch(`https://dummyjson.com/users/${id}`)
   const jsonData = await response.json()
   return jsonData
 }
 
 export const getUserTodos = async (id:number) => {
-  const response = await fetch('https://dummyjson.com/users/5/todos')
+  const response = await fetch(`https://dummyjson.com/users/${id}/todos`)
   const jsonData = await response.json()
   return jsonData.todos
 }

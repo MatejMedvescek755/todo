@@ -1,4 +1,4 @@
-import { getUser, getUsers, User } from "../../index"
+import { getUsers, User } from "../../index"
 import React from "react"
 import SingleUserComponent from "../SingleUserComponent/SingleUserComponent"
 import { Link } from "react-router-dom"
