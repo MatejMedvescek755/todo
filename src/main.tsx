@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './components/TodosView/TodosView.tsx'
+import TodosView from './components/TodosView/TodosView.tsx'
 import './index.css'
 import {
   createBrowserRouter,
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/todos",
-        element: <App />,
+        element: <TodosView />,
         errorElement: <ErrorPage />
       },
       {
