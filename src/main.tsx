@@ -8,7 +8,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from "./error-page";
-import SinglePageView from "./components/SinglePageView/SinglePageView.tsx"
+import ManageTodoView from "./components/ManageTodoView/ManageTodoView.tsx"
 import NavBar from './components/NavBar/NavBar.tsx';
 import UsersView from './components/UsersView/UsersView.tsx';
 import UserTodosView from './components/UserTodosView/UserTodosView.tsx';
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/todos/:id",
-        element: <SinglePageView />
+        element: <ManageTodoView />
       },
       {
         path: "/users",

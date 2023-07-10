@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom"
 import { Todo, User, getItem, getUser } from "../.."
 import Checkmark from "../../assets/Checkmark"
 
-const SingleTodoView = () => {
+const ManageTodoView = () => {
     const [isOpenEdit, setIsOpenEdit] = React.useState<boolean>(false)
     const [isOpenDelete, setIsOpenDelete] = React.useState<boolean>(false)
     const { id } = useParams<{id:string | undefined}>()
@@ -81,4 +81,4 @@ const loader = async (id: string | undefined) => {
 }
 
 
-export default SingleTodoView
+export default ManageTodoView
