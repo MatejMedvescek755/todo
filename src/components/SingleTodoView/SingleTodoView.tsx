@@ -23,7 +23,7 @@ const SingleTodoView = ({ todo, onDeleteHandler }: TabProps) => {
     return (
         <div className="group cursor-default mb-4 p-2 rounded-md flex w-[55vw]">
             <div className="flex h-[5vh] items-center text-2xl">
-                <Link to={{ pathname: `${todo.id}` }}>
+                <Link to={`/todos/${todo.id}` }>
                     {todo.completed ? <p className="text-gray-600 group-hover:text-gray-100 cursor-pointer line-through">
                         {todo.todo}
                     </p>
