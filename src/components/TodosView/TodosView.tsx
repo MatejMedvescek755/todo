@@ -5,30 +5,36 @@ import { addItem } from '../../index.ts';
 import { Todos } from "../../index.ts";
 import React from 'react';
 import { deleteItem } from "../../index.ts"
+import Modal from '../Modal/index.ts';
+import EmptyInputModal from '../EmptyInputModal/EmptyInputModal.tsx';
 
 
 function App() {
   const [todos, setTodos] = useState<Todos>()
   const [text, setText] = React.useState<string>("")
   const [error, setError] = React.useState<any>();
-
+  const [confirmModal, setConfirmModal] = React.useState<boolean>(false)
 
 
   async function handleClick() {
-    try {
-      const req = await addItem(text)
-      if(!todos) return
-      const newObject = {
-        todos: [req].concat(todos["todos"]),
-        total: todos["total"],
-        skip: todos["skip"],
-        limit: todos["limit"]
+    if(text  !== ""){
+      try {
+        const req = await addItem(text)
+        if(!todos) return
+        const newObject = {
+          todos: [req].concat(todos["todos"]),
+          total: todos["total"],
+          skip: todos["skip"],
+          limit: todos["limit"]
+        }
+        setTodos(newObject)
+        setText("")
+      } catch (error) {
+        console.error(error)
+        setError(error) 
       }
-      setTodos(newObject)
-      setText("")
-    } catch (error) {
-      console.error(error)
-      setError(error) 
+    }else{
+      setConfirmModal(true)
     }
   }
 
@@ -76,14 +82,17 @@ function App() {
   return (
     <>
       <div id="main" className='flex flex-col items-center flex-wrap max-w-[100vw] min-h-[95vh]'>
+        <Modal isOpen={confirmModal}>
+          <EmptyInputModal setState={setConfirmModal}></EmptyInputModal>  
+        </Modal>
         <div className='flex w-[55vw] h-[10vh] flex-row justify-center items-end'>
           <div className='flex flex-col mb-4 w-[50vw]'>
             <label className='capitalize' htmlFor="add">add tasks</label>
             <input className='2xl:w-[50vw] xl:w-[49vw] lg:w-[48vw]
-            sm:w-[45vw] w-[42vw]  rounded-sm p-2' type="text" name="add" id="add" value={text} onChange={(e) => setText(e.target.value)} autoComplete='false' />
+            sm:w-[45vw] w-[42vw]  rounded-sm p-2' type="text" name="add" id="add" value={text} onChange={(e) => setText(e.target.value)} autoComplete='false'/>
           </div>
           <div className='flex justify-center items-center w-[5vw] h-[10vh]'>
-            <button className='mt-6 min-w-fit border-2 p-2 border-white rounded-md' onClick={handleClick}>confirm</button>
+            <button className='mt-6 min-w-fit border-2 p-2 border-white rounded-md' onClick={handleClick} >confirm</button>
           </div>
         </div>
         <div className='flex flex-wrap justify-center items-start justify-center content-center w-[55vw] flex-col'>
@@ -97,7 +106,6 @@ function App() {
               )
             }
           })
-
           }</div> : <p>loading</p>}
         </div>
       </div>
