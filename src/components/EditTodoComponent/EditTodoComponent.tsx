@@ -27,7 +27,7 @@ const EditTodoComponent = ({ setState,todo }: EditTodoProps) => {
             {
                 todo ?
                     <div className="flex flex-col justify-between h-[25vh]">
-                        <input type="text" name={todo.id + ""} id={todo.id + ""} defaultValue={todo.todo}
+                        <input type="text" name={todo.id + ""} id={todo.id + ""} defaultValue={todo.todo} autoComplete="off"
                             onChange={(e) => setText(e.target.value)}
                             className="bg-white border-2 border-black rounded-md w-[90%] h-[5vh] mb-5 p-2" />
                         <div className="w-[18vw] h-[5vh] items-center flex justify-between">
