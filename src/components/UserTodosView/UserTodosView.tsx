@@ -1,7 +1,7 @@
 import React from "react"
 import { useParams } from "react-router-dom"
 import { Todo, User, deleteItem, getUser, getUserTodos } from "../.."
-import SingleTodoView from "../SingleTodoView"
+import SingleTodoView from "../TodoRow"
 
 const UserTodosView = () => {
     const { userId } = useParams()

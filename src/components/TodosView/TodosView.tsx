@@ -1,6 +1,6 @@
 import { Todo, getItems } from '../../index.ts'
 import { useEffect, useState } from 'react'
-import SingleTodoView from '../SingleTodoView/index.tsx';
+import SingleTodoView from '../TodoRow/index.tsx';
 import { addItem } from '../../index.ts';
 import { Todos } from "../../index.ts";
 import React from 'react';

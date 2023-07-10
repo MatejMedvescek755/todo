@@ -1,4 +1,4 @@
-import SingleTodoView from "./SingleTodoView";
+import TodoRow from "./TodoRow";
 import { Todo } from "../../index"
 
 
@@ -7,4 +7,4 @@ export interface TabProps{
     onDeleteHandler:(id: number) => Promise<void>,
 }
 
-export default SingleTodoView
+export default TodoRow

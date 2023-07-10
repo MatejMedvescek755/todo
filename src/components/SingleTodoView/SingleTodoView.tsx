@@ -1,44 +1,83 @@
-import { TabProps } from "./index.tsx"
-import { Link } from "react-router-dom"
-import DeleteIcon from "../../assets/DeleteIcon.tsx"
+import DeleteTodoComponent from "../DeleteTodoComponent"
+import EditTodoComponent from "../EditTodoComponent/EditTodoComponent"
+import Modal from "../Modal/Modal"
 import React from "react"
+import { useParams } from "react-router-dom"
+import { Todo, User, getItem, getUser } from "../.."
+import Checkmark from "../../assets/Checkmark"
 
-const SingleTodoView = ({ todo, onDeleteHandler }: TabProps) => {
-    const [deleted, setDeleted] = React.useState<boolean>(false)
+const SingleTodoView = () => {
+    const [isOpenEdit, setIsOpenEdit] = React.useState<boolean>(false)
+    const [isOpenDelete, setIsOpenDelete] = React.useState<boolean>(false)
+    const { id } = useParams<{id:string | undefined}>()
+    const [todo, setTodo] = React.useState<Todo>()
+    const [error, setError] = React.useState<any>();
+    const [user, setUser] = React.useState<User>()
 
-    const onDelete = () => {
-        onDeleteHandler(todo.id)
-        setDeleted(true)
-    }
-    if (deleted) return (
-    <div className="flex hover:text-gray-100 text-gray-600 text-2xl">deleting...
-        <div className="ml-2" role="status">
-            <svg aria-hidden="true" className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
-                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
-            </svg>
-            <span className="sr-only">Loading...</span>
-        </div>
-    </div>)
+    React.useEffect(() => {
+        try {
+
+            loader(id).then((res) => {
+                setTodo(res);
+                getUser(res?.userId).then((resUser) => {
+                    setUser(resUser)
+                })
+            })
+
+        } catch (error) {
+            console.error(error)
+            setError(error)
+        }
+
+        return () => {
+            setError(undefined)
+        }
+    }, [id])
+
+    if (error)
+        return <div>error {error}</div>
+    if (todo === undefined)
+        return <div>loading ...</div>
     return (
-        <div className="group cursor-default mb-4 p-2 rounded-md flex w-[55vw]">
-            <div className="flex h-[5vh] items-center text-2xl">
-                <Link to={`/todos/${todo.id}` }>
-                    {todo.completed ? <p className="text-gray-600 group-hover:text-gray-100 cursor-pointer line-through">
-                        {todo.todo}
-                    </p>
-                        :
-                        <p className="text-gray-300 group-hover:text-gray-100 cursor-pointer">
-                            {todo.todo}
-                        </p>}
-                </Link>
-            </div>
-            <div className="group-hover:flex cursor-pointer hidden px-2 items-center" onClick={onDelete}>
-                <DeleteIcon />
-            </div>
+        <div>
+            <div className="w-full h-[95vh] flex justify-center mt-10">
+                <div className="shadow-xl shadow-gray-700 p-4 pb-8 flex flex-col justify-between
+                 h-[30vh] rounded-lg bg-white">
+                    <div className="text-black w-[25vw] flex justify-center">
+                        {user ? <p>Owner of Todo: {`${user.firstName} ${user.lastName}`}</p> : <p>Loading...</p>}
+                    </div>
+                    <div className="w-[25vw] justify-center text-black p-2 flex">
+                        <div><p className="font-mono text-lg">{todo.todo}</p></div>
+                        <div className="ml-4">{todo.completed ? <Checkmark /> : ""}</div>
+                    </div>
+                    <div className="flex w-[25vw] items-center flex-col p-2 ">
+                        <button className='mt-6 h-[5vh] w-[15vw] text-black min-w-fit border-2 p-2 border-black rounded-md' onClick={() => setIsOpenEdit(true)}>edit
+                        </button>
+                        <button className='mt-6 h-[5vh] w-[15vw] text-black min-w-fit border-2 p-2 border-black rounded-md' onClick={() => setIsOpenDelete(true)}>delete
+                        </button>
+                    </div>
+                </div>
 
+                <Modal isOpen={isOpenEdit}>
+                    <EditTodoComponent todo={todo} setState={setIsOpenEdit} />
+                </Modal>
+                <Modal isOpen={isOpenDelete}>
+                    <DeleteTodoComponent setState={setIsOpenDelete} />
+                </Modal>
+            </div>
         </div>
     )
+}
+
+const loader = async (id: string | undefined) => {
+    try {
+        if(id){
+            const todo: Todo = await getItem(parseInt(id))
+            return todo
+        }
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 
